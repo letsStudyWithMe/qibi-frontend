@@ -1,17 +1,25 @@
 export default [
-  { name:'登录',path: '/user', layout: false, routes: [{ path: '/user/login', component: './User/Login' }] },
-  { name:'欢迎页面',path: '/welcome', icon: 'smile', component: './Welcome' },
+  {
+    name: '登录',
+    path: '/user',
+    layout: false,
+    routes: [
+      {path: '/user/login', component: './User/Login'},
+      {path: '/user/register',name:'注册页', component: './User/Register'}
+    ]
+  },
+  {name: '欢迎页面', path: '/welcome', icon: 'smile', component: './Welcome'},
   {
     path: '/admin',
     icon: 'crown',
     access: 'canAdmin',
-    name:'管理员页面',
+    name: '管理员页面',
     routes: [
-      { path: '/admin', redirect: '/admin/sub-page' },
-      { path: '/admin/sub-page', component: './Admin' },
+      {path: '/admin', redirect: '/admin/sub-page'},
+      {path: '/admin/sub-page', component: './Admin'},
     ],
   },
-  { icon: 'table', path: '/list', component: './TableList' },
-  { path: '/', redirect: '/welcome' },
-  { path: '*', layout: false, component: './404' },
+  {icon: 'table', path: '/list', component: './TableList'},
+  {path: '/', redirect: '/welcome'},
+  {path: '*', layout: false, component: './404'},
 ];
