@@ -1,5 +1,4 @@
 import Footer from '@/components/Footer';
-import {getFakeCaptcha} from '@/services/ant-design-pro/login';
 import {LockOutlined, MobileOutlined, UserOutlined,} from '@ant-design/icons';
 import {LoginForm, ProFormCaptcha, ProFormText,} from '@ant-design/pro-components';
 import {useEmotionCss} from '@ant-design/use-emotion-css';
@@ -27,7 +26,7 @@ const LoginMessage: React.FC<{
     );
 };
 const Login: React.FC = () => {
-    const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
+    /*const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});*/
     const [type, setType] = useState<string>('account');
     const {setInitialState} = useModel('@@initialState');
     const containerClassName = useEmotionCss(() => {
@@ -74,7 +73,7 @@ const Login: React.FC = () => {
             message.error(defaultLoginFailureMessage);
         }
     };
-    const {status, type: loginType} = userLoginState;
+    /*const {status, type: loginType} = userLoginState;*/
     return (
         <div className={containerClassName}>
             <Helmet>
@@ -151,7 +150,7 @@ const Login: React.FC = () => {
                         </>
                     )}
 
-                    {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误"/>}
+                    {/*{status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误"/>}*/}
                     {type === 'mobile' && (
                         <>
                             <ProFormText
@@ -195,12 +194,12 @@ const Login: React.FC = () => {
                                     },
                                 ]}
                                 onGetCaptcha={async (phone) => {
-                                    const result = await getFakeCaptcha({
+                                /*    const result = await getFakeCaptcha({
                                         phone,
                                     });
                                     if (!result) {
                                         return;
-                                    }
+                                    }*/
                                     message.success('获取验证码成功！验证码为：1234');
                                 }}
                             />

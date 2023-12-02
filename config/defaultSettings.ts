@@ -8,11 +8,13 @@ const Settings: ProLayoutProps & {
   logo?: string;
 } = {
   navTheme: 'light',
-  colorPrimary: '#722ED1', //紫色
   layout: 'mix',
   contentWidth: 'Fluid',
-  fixedHeader: false,
+  fixedHeader: true,
   fixSiderbar: true,
+  colorPrimary: '#722ED1', //紫色
+  splitMenus: false,
+  siderMenuType: 'sub',
   colorWeak: false,
   title: '智能BI平台',
   pwa: true,
@@ -23,5 +25,4 @@ const Settings: ProLayoutProps & {
     //https://procomponents.ant.design/components/layout#%E9%80%9A%E8%BF%87-token-%E4%BF%AE%E6%94%B9%E6%A0%B7%E5%BC%8F
   },
 };
-
 export default Settings;

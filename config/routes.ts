@@ -7,7 +7,21 @@ export default [
       {path: '/user/register',name:'注册', component: './User/Register'}
     ]
   },
-  {name: '欢迎页面', path: '/welcome', icon: 'smile', component: './Welcome'},
+  {
+    name: '欢迎页面',
+    path: '/welcome',
+    icon: 'smile',
+    component: './Welcome'
+  },
+  {
+    path: '/chart', name: '图表管理', icon: 'pieChart',
+    hideChildrenInMenu: false,
+    routes: [
+      {path: '/chart/showCharts', name: '图表列表', component: './Chart/ShowCharts'},
+      {path: '/chart/addCharts',name: '生成图表',component: './Chart/AddCharts'},
+    ]
+  },
+
   {
     path: '/admin',
     icon: 'crown',
@@ -18,7 +32,7 @@ export default [
       {path: '/admin/sub-page', component: './Admin'},
     ],
   },
-  {icon: 'table', path: '/list', component: './TableList'},
+
   {path: '/', redirect: '/welcome'},
   {path: '*', layout: false, component: './404'},
 ];

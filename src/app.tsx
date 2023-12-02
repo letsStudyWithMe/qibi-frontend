@@ -7,7 +7,9 @@ import type {RunTimeLayoutConfig} from '@umijs/max';
 import {history, Link} from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import {AvatarDropdown, AvatarName} from './components/RightContent/AvatarDropdown';
+// @ts-ignore
 import {errorConfig} from './requestConfig';
+// @ts-ignore
 import {getLoginUserUsingGet} from "@/services/qibi/userController";
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -18,7 +20,7 @@ const loginPath = '/user/login';
  * */
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;
+  currentUser?: API.LoginUserVO;
   loading?: boolean;
 }> {
   const fetchUserInfo = async () => {

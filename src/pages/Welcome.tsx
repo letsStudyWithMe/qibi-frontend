@@ -76,9 +76,6 @@ const InfoCard: React.FC<{
       >
         {desc}
       </div>
-      <a href={href} target="_blank" rel="noreferrer">
-        了解更多 {'>'}
-      </a>
     </div>
   );
 };
@@ -126,8 +123,8 @@ const Welcome: React.FC = () => {
               width: '65%',
             }}
           >
-            智能BI平台 是一个整合了 umi，智能BI平台 和 ProComponents
-            的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
+            智能BI平台是一个基于 React + Spring Boot + MQ + AIGC 的智能数据分析平台，
+            区别于传统 BI，用户只需要导入原始数据集、并输入分析诉求，就能自动生成可视化图表及分析结论，实现数据分析的降本增效。
           </p>
           <div
             style={{
@@ -139,20 +136,22 @@ const Welcome: React.FC = () => {
             <InfoCard
               index={1}
               href="https://umijs.org/docs/introduce/introduce"
-              title="了解 umi"
-              desc="umi 是一个可扩展的企业级前端应用框架,umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。"
+              title="了解 BI平台"
+              desc="BI平台是商业智能（Business Intelligence）的缩写，用于摄取业务数据并将数据呈现在用户友好型视图中，如报告、仪表板、图表和图形。BI平台的核心作用是对获取的数据进行分析，以获得切实可行的洞察，制定出更加明智的决策。
+BI平台通常都会提供以下功能的某种组合：支持自定义的仪表板、数据可视化、报告计划（带有安全规范）、面向 IT 部门的数据质量管理和监督等"
             />
             <InfoCard
               index={2}
-              title="了解 智能BI平台"
+              title="了解 AIGC"
               href="https://ant.design"
-              desc="antd 是基于 智能BI平台 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。"
+              desc="AIGC，全称为Artificial Intelligence Generated Content，中文译为人工智能生成内容。这是一种通过人工智能技术自动生成内容的生产方式。在更广义的理解中，AIGC并不仅仅局限于内容生成，它还包括利用AI来创建虚拟应用、非同质化代币（NFT）等。"
             />
             <InfoCard
               index={3}
-              title="了解 Pro Components"
+              title="了解 MQ"
               href="https://procomponents.ant.design"
-              desc="ProComponents 是一个基于 智能BI平台 做了更高抽象的模板组件，以 一个组件就是一个页面为开发理念，为中后台开发带来更好的体验。"
+              desc="消息队列（MQ），也被称为Message Queue，是一种基础数据结构中的'先进先出'形式的数据结构。它本质上是一个保存消息的容器，即一个队列。MQ的主要功能是解决应用程序之间的通信问题，常用于业务异步解耦、解耦微服务、流量削峰填谷、消息分发和保证分布式事务的数据一致性等场景。
+MQ的工作原理是这样的：生产者生产消息并将要传输的数据（即消息）放入队列中，然后通过队列机制来实现消息的传递。消费者则可以从指定的队列中拉取消息，或者订阅相应的队列，由MQ服务端主动向其推送消息。"
             />
           </div>
         </div>
