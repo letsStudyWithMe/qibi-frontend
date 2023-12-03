@@ -22,6 +22,7 @@ export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.LoginUserVO;
   loading?: boolean;
+  fetchUserInfo?:() => Promise<API.LoginUserVO | undefined>;
 }> {
   const fetchUserInfo = async () => {
     try {

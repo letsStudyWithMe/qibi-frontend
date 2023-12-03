@@ -17,7 +17,7 @@ export default [
     path: '/chart', name: '图表管理', icon: 'pieChart',
     hideChildrenInMenu: false,
     routes: [
-      {path: '/chart/showCharts', name: '图表列表', component: './Chart/ShowCharts'},
+      {path: '/chart/showCharts', name: '图表列表', component: './Chart/ShowCharts',access: 'canAdmin',},
       {path: '/chart/addCharts',name: '生成图表',component: './Chart/AddCharts'},
     ]
   },
