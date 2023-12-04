@@ -21,6 +21,13 @@ export default [
       {path: '/chart/addCharts',name: '生成图表',component: './Chart/AddCharts'},
     ]
   },
+  {
+    path: '/user', name: '用户管理', icon: 'user',
+    hideChildrenInMenu: false,
+    routes: [
+      {path: '/user/showUsers', name: '用户列表', component: './User/Manage'},
+    ]
+  },
 
   {
     path: '/admin',
