@@ -1,18 +1,16 @@
 import Footer from '@/components/Footer';
-import {LockOutlined,UserOutlined,} from '@ant-design/icons';
-import {LoginForm, ProFormText,} from '@ant-design/pro-components';
-import {useEmotionCss} from '@ant-design/use-emotion-css';
-import {Helmet, history, useModel} from '@umijs/max';
-import {Button, message, Tabs} from 'antd';
-import React, {useState} from 'react';
+import { LoginForm, ProFormText } from '@ant-design/pro-components';
+import { useEmotionCss } from '@ant-design/use-emotion-css';
+import { Helmet, history } from '@umijs/max';
+import { message, Tabs } from 'antd';
+import React, { useState } from 'react';
 import Settings from '../../../../config/defaultSettings';
 // @ts-ignore
-import {userRegisterUsingPost} from "@/services/qibi/userController";
-import {Link} from "@@/exports";
+import { userRegisterUsingPost } from '@/services/qibi/userController';
+import { Link } from '@@/exports';
 
 const Register: React.FC = () => {
   const [type, setType] = useState<string>('register');
-  const {setInitialState} = useModel('@@initialState');
   const containerClassName = useEmotionCss(() => {
     return {
       display: 'flex',
@@ -24,7 +22,7 @@ const Register: React.FC = () => {
       backgroundSize: '100% 100%',
     };
   });
- /* const fetchUserInfo = async () => {
+  /* const fetchUserInfo = async () => {
     const userInfo = await getLoginUserUsingGet();
     console.log(userInfo);
     if (userInfo) {
@@ -38,10 +36,10 @@ const Register: React.FC = () => {
     }
   };*/
   const handleSubmit = async (values: API.UserRegisterRequest) => {
-    const { userPassword , checkPassword} = values;
+    const { userPassword, checkPassword } = values;
     //校验
-    if(userPassword !== checkPassword){
-      message.error("两次输入的密码不一致");
+    if (userPassword !== checkPassword) {
+      message.error('两次输入的密码不一致');
       return;
     }
     try {
@@ -78,15 +76,15 @@ const Register: React.FC = () => {
       >
         <LoginForm
           submitter={{
-            searchConfig:{
-              submitText:"注册"
-            }
+            searchConfig: {
+              submitText: '注册',
+            },
           }}
           contentStyle={{
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={< img alt="logo" src="/logo.svg"/>}
+          logo={<img alt="logo" src="/logo.svg" />}
           title="智能BI平台"
           subTitle={'智能BI平台'}
           initialValues={{
@@ -138,7 +136,7 @@ const Register: React.FC = () => {
                   },
                 ]}
               />
-              <ProFormText
+              <ProFormText.Password
                 name="userPassword"
                 fieldProps={{
                   size: 'large',
@@ -157,7 +155,7 @@ const Register: React.FC = () => {
                   },
                 ]}
               />
-              <ProFormText
+              <ProFormText.Password
                 name="checkPassword"
                 fieldProps={{
                   size: 'large',
@@ -186,9 +184,8 @@ const Register: React.FC = () => {
             <Link to={'/user/login'}>已有账号，去登录</Link>
           </div>
         </LoginForm>
-
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

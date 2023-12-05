@@ -118,12 +118,12 @@ export async function listChartByPageUsingPost(
   });
 }
 
-/** listMyChartByPage POST /api/chart/my/list/page */
-export async function listMyChartByPageUsingPost(
+/** listMyChartByPage POST /api/chart/user/list/page */
+export async function listUserChartByPageUsingPost(
   body: API.ChartQueryRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePageChart_>('/api/chart/my/list/page', {
+  return request<API.BaseResponsePageChart_>('/api/chart/user/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
