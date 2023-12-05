@@ -32,7 +32,7 @@ const ChartPage: React.FC = () => {
     loadData();
   }, [searchParams]);
 
-  if (total === 0) {
+  if (total == 0) {
     return (
       <div className="chart-page-no-result">
         <img alt="kongkongruye" src="/kongkongruye.jpg" />

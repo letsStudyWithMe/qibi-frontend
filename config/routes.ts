@@ -23,11 +23,18 @@ export default [
       { path: '/chart/addCharts', name: '生成图表', component: './Chart/AddCharts' },
     ],
   },
+  {
+    path: '/user', name: '用户管理', icon: 'user',
+    hideChildrenInMenu: false,
+    routes: [
+      {path: '/user/showUsers', name: '用户列表', component: './User/Manage',access: 'canRoot'},
+    ]
+  },
 
   {
     path: '/admin',
     icon: 'crown',
-    access: 'canAdmin',
+    access: 'canRoot',
     name: '管理员页面',
     routes: [
       { path: '/admin', redirect: '/admin/sub-page' },

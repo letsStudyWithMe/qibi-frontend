@@ -4,6 +4,6 @@
 export default function access(initialState: { currentUser?: API.LoginUserVO } | undefined) {
   const { currentUser } = initialState ?? {};
   return {
-    canAdmin: currentUser && currentUser.userRole === 'root' ? true : false,
+    canRoot: currentUser && currentUser.userRole === 'root' ? true : false,
   };
 }
