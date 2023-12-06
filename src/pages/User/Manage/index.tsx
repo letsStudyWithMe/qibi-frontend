@@ -1,8 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Button, message, Modal, Popconfirm, Space, Table} from "antd";
+import React, {useEffect, useState} from 'react';
+import {Button, Input, message, Popconfirm, Table} from "antd";
 import {deleteUserUsingPost, listUserByPageUsingPost} from "@/services/qibi/userController";
 import {ColumnsType} from "antd/es/table";
-import {data} from "@umijs/utils/compiled/cheerio/lib/api/attributes";
+import {RedoOutlined} from "@ant-design/icons";
+import Search from "antd/es/input/Search";
 
 const Manage: React.FC = () => {
   const initSearchParams = {
@@ -11,10 +12,10 @@ const Manage: React.FC = () => {
   };
   // @ts-ignore
   const [searchParams, setSearchParams] = useState<API.UserQueryRequest>({...initSearchParams});
-  const [deleteParams, setDeleteParams] = useState<API.DeleteRequest>();
   const [userList, setUserList] = useState<API.User[]>();
   const [total, setTotal] = useState<number>(0);
-
+  const [loading, setLoading] = useState<boolean>(false);
+  const { Search } = Input;
   const loadData = async (page: any, pageSize: any) => {
     try {
       searchParams.pageSize = pageSize ?? 10;
@@ -38,27 +39,38 @@ const Manage: React.FC = () => {
   }, [searchParams]);
 
   return (
-    <Table
-      rowKey={"id"}
-      pagination={{
-        total: total,
-        pageSizeOptions: [10, 20, 50, 100],
-        onChange: loadData,
-        showTotal: total => `共${total}条记录 `,
-        defaultPageSize: 10,
-        defaultCurrent: 1,
-        position: ['bottomRight'],
-        size: 'small',
-        showSizeChanger: true,
-        showQuickJumper: true,
-      }}
-      style={{marginTop: 20}}
-      columns={columnss}
-      dataSource={userList}/>
+    <div style={{marginBottom: 30}}>
+      <Search placeholder="请输入用户名称" enterButton loading={loading} onSearch={(value) => {
+        // 设置搜索条件
+        // @ts-ignore
+        setSearchParams({
+          ...initSearchParams,
+          userName: value,
+        })
+      }}/>
+      <Button type="primary" onClick={()=>loadData(1,10)} loading={loading} icon={<RedoOutlined />} style={{position:"absolute",right:'2px'}}></Button>
+      <Table
+        rowKey={"id"}
+        pagination={{
+          total: total,
+          pageSizeOptions: [10, 20, 50, 100],
+          onChange: loadData,
+          showTotal: total => `共${total}条记录 `,
+          defaultPageSize: 10,
+          defaultCurrent: 1,
+          position: ['bottomRight'],
+          size: 'small',
+          showSizeChanger: true,
+          showQuickJumper: true,
+        }}
+        style={{marginTop: 20}}
+        columns={columns}
+        dataSource={userList}/>
+    </div>
   );
 };
 
-const columnss: ColumnsType<API.User> = [
+const columns: ColumnsType<API.User> = [
   {
     title: 'Id',
     dataIndex: 'id',
@@ -93,9 +105,9 @@ const columnss: ColumnsType<API.User> = [
     key: 'action',
     render: (txt, record, index) =>{
       return (
-        <div>
-          <Button type="primary" size="small">编辑</Button>&nbsp;&nbsp;
-          <Popconfirm title="确定要删除此项？" onCancel={()=>console.log('取消删除')} onConfirm={()=>
+          <div>
+            <Button type="primary" size="small">编辑</Button>&nbsp;&nbsp;
+            <Popconfirm title="确定要删除此项？" onCancel={()=>console.log('取消删除')} onConfirm={()=>
             {
               const res =  deleteUserUsingPost(txt).then(data=>data.data);
               if (!res) {
@@ -105,10 +117,10 @@ const columnss: ColumnsType<API.User> = [
                 location.reload();
               }
             }
-          }>
-            <Button type="primary" size="small">删除</Button>
-          </Popconfirm>
-        </div>
+            }>
+              <Button type="primary" size="small">删除</Button>
+            </Popconfirm>
+          </div>
       )
     }
   },

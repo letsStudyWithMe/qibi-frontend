@@ -49,6 +49,7 @@
     "@ant-design/icons": "^4.8.0",
     "@ant-design/pro-components": "^2.3.57",
     "@ant-design/use-emotion-css": "1.0.4",
+    "@ebay/nice-modal-react": "^1.2.13",
     "@umijs/route-utils": "^2.2.2",
     "antd": "^5.2.2",
     "axios": "^1.2.0-alpha.1",

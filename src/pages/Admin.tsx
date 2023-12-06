@@ -8,7 +8,7 @@ const Admin: React.FC = () => {
     <PageContainer content={' 这个页面只有 admin 权限才能查看'}>
       <Card>
         <Alert
-          message={'更快更强的重型组件，已经发布。'}
+          message={'快来试试吧。'}
           type="success"
           showIcon
           banner
@@ -26,18 +26,6 @@ const Admin: React.FC = () => {
           <SmileTwoTone /> 智能BI平台 <HeartTwoTone twoToneColor="#eb2f96" /> You
         </Typography.Title>
       </Card>
-      <p
-        style={{
-          textAlign: 'center',
-          marginTop: 24,
-        }}
-      >
-        Want to add more pages? Please refer to{' '}
-        <a href="https://pro.ant.design/docs/block-cn" target="_blank" rel="noopener noreferrer">
-          use block
-        </a>
-        。
-      </p>
     </PageContainer>
   );
 };
