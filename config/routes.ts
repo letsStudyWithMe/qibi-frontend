@@ -21,6 +21,7 @@ export default [
     routes: [
       { path: '/chart/showCharts', name: '图表列表', component: './Chart/ShowCharts' },
       { path: '/chart/addCharts', name: '生成图表', component: './Chart/AddCharts' },
+      { path: '/chart/addChartsAsync', name: '生成图表(异步线程池)', component: './Chart/AddChartsAsync' },
       { path: '/chart/addChartsRabbitMQ', name: '生成图表(RabbitMQ)', component: './Chart/AddChartsRabbitMQ' },
     ],
   },

@@ -1,19 +1,18 @@
 import {useModel} from '@umijs/max';
-import React, {useState} from 'react';
-import {genChartByAiUsingPost} from "@/services/qibi/chartController";
-import {Button, Card, Col, Divider, Form, Input, message, Row, Select, Space, Upload} from "antd";
+import React, {useEffect, useState} from 'react';
+import {genChartByAiThreadPoolUsingPost} from "@/services/qibi/chartController";
+import {Button, Card, Form, Input, message, Select, Space, Upload} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import {UploadOutlined} from "@ant-design/icons";
-import ReactECharts from 'echarts-for-react';
-import Spin from 'antd/lib/spin';
+import {useForm} from "rc-field-form";
+import {Link} from "umi";
+import {getInitialState} from "@/app";
 
-const AddCharts: React.FC = () => {
-  const {initialState} = useModel('@@initialState');
-  // 定义状态，用来接收后端的返回值，让它实时展示在页面上
-  const [chart, setChart] = useState<API.BiResponse>();
-  const [option, setOption] = useState<any>();
+const AddChartsAsync: React.FC = () => {
+  const [form] =Form.useForm();
   // 提交中的状态，默认未提交
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const {initialState} = useModel('@@initialState');
   const normFile = (e: any) => {
     if (Array.isArray(e)) {
       return e;
@@ -26,32 +25,18 @@ const AddCharts: React.FC = () => {
     }
     //开始提交 把状态变成true 以防多次点击
     setSubmitting(true);
-    setChart(undefined);
-    setOption(undefined);
-
-
     const params = {
       ...values,
       file: undefined,
     };
     try {
       // 生成
-      const res = await genChartByAiUsingPost(params, {}, values.file[0].originFileObj);
-      if (res.code === 0) {
-        message.success("成功");
-        // 解析成对象，为空则设为空字符串
-        // @ts-ignore
-        const chartOption = JSON.parse(res.data.genChart ?? '');
-        // 如果为空，则抛出异常，并提示”图表代码解析错误
-        if (!chartOption) {
-          throw new Error("图表代码解析错误");
-        } else {
-          // 从后端得到响应结果之后，把响应结果设置到图表状态里
-          setChart(res.data);
-          setOption(chartOption);
-        }
+      const res = await genChartByAiThreadPoolUsingPost(params, {}, values.file[0].originFileObj);
+      if (!res?.data) {
+        message.error("分析失败");
       } else {
-        message.error("失败");
+        message.success("分析任务提交成功，请稍后在我的图表查看");
+        form.resetFields();
       }
     } catch (e: any) {
       message.error("分析失败" + e.message);
@@ -59,26 +44,22 @@ const AddCharts: React.FC = () => {
     // 当结束提交，把submitting设置为false
     setSubmitting(false);
   };
-  const onFinish = (values: any) => {
-    handleSubmit(values as any);
-  }
 
   return (
     // 把页面内容指定一个类名add-chart
-    <div className="add-chart">
-      <Row gutter={24}>
-        <Col span={12}>
+    <div className="add-chart-async">
           <Card title={'智能分析'}>
             <Form
+              form={form}
               name="addChart"
-              onFinish={onFinish}
+              onFinish={handleSubmit}
               initialValues={{}}
               style={{maxWidth: 600}}
             >
               <Form.Item name="goal"
                          label="分析目标"
                          rules={[{required: true, message: '请输入分析目标'}]}>
-                <TextArea/>
+                <TextArea placeholder="请输入你的分析需求，比如: 分析网站用户的增长情况"/>
               </Form.Item>
 
               <Form.Item name="name"
@@ -114,7 +95,7 @@ const AddCharts: React.FC = () => {
 
               <Form.Item wrapperCol={{span: 12, offset: 6}}>
                 <Space>
-                  <Button type="primary" htmlType="submit">
+                  <Button type="primary" htmlType="submit" loading={submitting} disabled={submitting}>
                     生成
                   </Button>
                   <Button htmlType="reset">重置</Button>
@@ -122,23 +103,7 @@ const AddCharts: React.FC = () => {
               </Form.Item>
             </Form>
           </Card>
-        </Col>
-        <Col span={12}>
-          <Card title="分析结论">
-            {chart?.genResult ?? <div>请先在左侧进行提交</div>}
-            <Spin spinning={submitting}/>
-          </Card>
-          <Divider/>
-          <Card title={"可视化图表"}>
-            {
-              //后端返回的代码是字符串，不是对象，用JSoN.parse解析成对象
-              option && <ReactECharts option={option}/>
-            }
-            <Spin spinning={submitting}/>
-          </Card>
-        </Col>
-      </Row>
     </div>
   );
 };
-export default AddCharts;
+export default AddChartsAsync;

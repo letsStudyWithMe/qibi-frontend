@@ -4,6 +4,7 @@ import {deleteUserUsingPost, listUserByPageUsingPost} from "@/services/qibi/user
 import {ColumnsType} from "antd/es/table";
 import {RedoOutlined} from "@ant-design/icons";
 import Search from "antd/es/input/Search";
+import {useModel} from "@@/exports";
 
 const Manage: React.FC = () => {
   const initSearchParams = {
@@ -16,12 +17,17 @@ const Manage: React.FC = () => {
   const [total, setTotal] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const { Search } = Input;
+  const {initialState} = useModel('@@initialState');
   const loadData = async (page: any, pageSize: any) => {
     try {
       searchParams.pageSize = pageSize ?? 10;
       searchParams.current = page ?? 1;
       const res = await listUserByPageUsingPost(searchParams);
       if (res.data) {
+        // @ts-ignore
+        if (res.data.total == 0) {
+          message.success("未查询到相关图表")
+        }
         setUserList(res.data.records ?? []);
         // @ts-ignore
         setTotal(res.data.total ?? 0);
@@ -48,7 +54,6 @@ const Manage: React.FC = () => {
           userName: value,
         })
       }}/>
-      <Button type="primary" onClick={()=>loadData(1,10)} loading={loading} icon={<RedoOutlined />} style={{position:"absolute",right:'2px'}}></Button>
       <Table
         rowKey={"id"}
         pagination={{
@@ -106,7 +111,6 @@ const columns: ColumnsType<API.User> = [
     render: (txt, record, index) =>{
       return (
           <div>
-            <Button type="primary" size="small">编辑</Button>&nbsp;&nbsp;
             <Popconfirm title="确定要删除此项？" onCancel={()=>console.log('取消删除')} onConfirm={()=>
             {
               const res =  deleteUserUsingPost(txt).then(data=>data.data);
