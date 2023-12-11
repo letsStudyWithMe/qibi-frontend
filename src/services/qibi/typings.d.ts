@@ -148,6 +148,12 @@ declare namespace API {
     id?: string;
   };
 
+  type genChartByAiRabbitMQUsingPOSTParams = {
+    chartType?: string;
+    goal?: string;
+    name?: string;
+  };
+
   type genChartByAiThreadPoolUsingPOSTParams = {
     chartType?: string;
     goal?: string;

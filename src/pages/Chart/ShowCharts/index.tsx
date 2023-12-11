@@ -114,7 +114,7 @@ const ChartPage: React.FC = () => {
                 <List.Item.Meta
                   avatar={<Avatar src={'https://randomuser,me/api/portraits/men/34.jpg'}/>}
                   title={item.name}
-                  description={item.chartType ? '图表类型' + item.chartType : undefined}
+                  description={item.chartType ? '图表类型：' + item.chartType : undefined}
                 />
                 <>
                   {
