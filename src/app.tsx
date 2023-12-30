@@ -1,16 +1,14 @@
 import Footer from '@/components/Footer';
-import {Question} from '@/components/RightContent';
-import {LinkOutlined} from '@ant-design/icons';
-import type {Settings as LayoutSettings} from '@ant-design/pro-components';
-import {SettingDrawer} from '@ant-design/pro-components';
-import type {RunTimeLayoutConfig} from '@umijs/max';
-import {history, Link} from '@umijs/max';
+import { Question } from '@/components/RightContent';
+import { getLoginUserUsingGet } from '@/services/qibi/userController';
+import { LinkOutlined } from '@ant-design/icons';
+import type { Settings as LayoutSettings } from '@ant-design/pro-components';
+import { SettingDrawer } from '@ant-design/pro-components';
+import type { RunTimeLayoutConfig } from '@umijs/max';
+import { history, Link } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
-import {AvatarDropdown, AvatarName} from './components/RightContent/AvatarDropdown';
-// @ts-ignore
-import {errorConfig} from './requestConfig';
-// @ts-ignore
-import {getLoginUserUsingGet} from "@/services/qibi/userController";
+import { AvatarDropdown, AvatarName } from './components/RightContent/AvatarDropdown';
+import { errorConfig } from './requestConfig';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -22,7 +20,7 @@ export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.LoginUserVO;
   loading?: boolean;
-  fetchUserInfo?:() => Promise<API.LoginUserVO | undefined>;
+  fetchUserInfo?: () => Promise<API.LoginUserVO | undefined>;
 }> {
   const fetchUserInfo = async () => {
     try {
@@ -133,7 +131,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
  * @doc https://umijs.org/docs/max/request#配置
  */
 export const request = {
-  baseURL:"http://localhost:8081",
-  withCredentials:true,
+  baseURL: 'http://localhost:8081',
+  withCredentials: true,
   ...errorConfig,
 };

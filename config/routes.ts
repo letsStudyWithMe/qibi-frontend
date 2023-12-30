@@ -21,16 +21,32 @@ export default [
     routes: [
       { path: '/chart/showCharts', name: '图表列表', component: './Chart/ShowCharts' },
       { path: '/chart/addCharts', name: '生成图表', component: './Chart/AddCharts' },
-      { path: '/chart/addChartsAsync', name: '生成图表(异步线程池)', component: './Chart/AddChartsAsync' },
-      { path: '/chart/addChartsRabbitMQ', name: '生成图表(RabbitMQ)', component: './Chart/AddChartsRabbitMQ' },
+      {
+        path: '/chart/addChartsAsync',
+        name: '生成图表(异步线程池)',
+        component: './Chart/AddChartsAsync',
+      },
+      {
+        path: '/chart/addChartsRabbitMQ',
+        name: '生成图表(RabbitMQ)',
+        component: './Chart/AddChartsRabbitMQ',
+      },
     ],
   },
   {
-    path: '/user', name: '用户管理', icon: 'user',
+    path: '/user',
+    name: '用户管理',
+    icon: 'user',
     hideChildrenInMenu: false,
     routes: [
-      {path: '/user/showUsers', name: '用户列表', component: './User/Manage',access: 'canRoot'},
-    ]
+      { path: '/user/showUsers', name: '用户列表', component: './User/Manage', access: 'canRoot' },
+      {
+        path: '/user/showUsersNew',
+        name: '用户列表(新)',
+        component: './User/ManageNew',
+        access: 'canRoot',
+      },
+    ],
   },
 
   {
